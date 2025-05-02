@@ -4,7 +4,7 @@ package schedulingservicepb;
 
 import "google/protobuf/timestamp.proto";
 
-option go_package="github.com/pintuChoudhary/common-lib/protobuf/gen/schedulingservicepb;schedulingservicepb";
+option go_package="./schedulingservicepb;schedulingservicepb";
 
 service SchedulingService {
     rpc GetSlot(GetSlotRequest) returns (GetSlotResponse){}
