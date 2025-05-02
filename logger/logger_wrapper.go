@@ -34,6 +34,13 @@ func Warn(msg string, fields ...any) {
 	zapLogger.Warn(msg, convertFields(fields...)...)
 }
 
+func Fatal(msg string, fields ...any) {
+	if zapLogger == nil {
+		panic("logger not initialized")
+	}
+	zapLogger.Fatal(msg, convertFields(fields...)...)
+}
+
 func convertFields(items ...any) []zap.Field {
 	fields := make([]zap.Field, 0, len(items))
 	for i, v := range items {
