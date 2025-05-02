@@ -516,8 +516,8 @@ const file_doctor_doctor_proto_rawDesc = "" +
 	"\x0fOperationStatus\x12\x15\n" +
 	"\x11OPERATION_UNKNOWN\x10\x00\x12\x15\n" +
 	"\x11OPERATION_SUCCESS\x10\x01\x12\x15\n" +
-	"\x11OPERATION_FAILURE\x10\x022\x81\x01\n" +
-	"\x11SchedulingService\x12l\n" +
+	"\x11OPERATION_FAILURE\x10\x022\x85\x01\n" +
+	"\x15DoctorScheduleService\x12l\n" +
 	"\x11GetDoctorSchedule\x12).doctorservicepb.GetDoctorScheduleRequest\x1a*.doctorservicepb.GetDoctorScheduleResponse\"\x00B#Z!./doctorservicepb;doctorservicepbb\x06proto3"
 
 var (
@@ -556,8 +556,8 @@ var file_doctor_doctor_proto_depIdxs = []int32{
 	7,  // 8: doctorservicepb.DoctorTimeOff.endTime:type_name -> google.protobuf.Timestamp
 	7,  // 9: doctorservicepb.DoctorTimeOff.createdAt:type_name -> google.protobuf.Timestamp
 	7,  // 10: doctorservicepb.DoctorTimeOff.updatedAt:type_name -> google.protobuf.Timestamp
-	3,  // 11: doctorservicepb.SchedulingService.GetDoctorSchedule:input_type -> doctorservicepb.GetDoctorScheduleRequest
-	4,  // 12: doctorservicepb.SchedulingService.GetDoctorSchedule:output_type -> doctorservicepb.GetDoctorScheduleResponse
+	3,  // 11: doctorservicepb.DoctorScheduleService.GetDoctorSchedule:input_type -> doctorservicepb.GetDoctorScheduleRequest
+	4,  // 12: doctorservicepb.DoctorScheduleService.GetDoctorSchedule:output_type -> doctorservicepb.GetDoctorScheduleResponse
 	12, // [12:13] is the sub-list for method output_type
 	11, // [11:12] is the sub-list for method input_type
 	11, // [11:11] is the sub-list for extension type_name

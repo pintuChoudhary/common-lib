@@ -19,101 +19,101 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SchedulingService_GetDoctorAppointments_FullMethodName = "/appointmentservicepb.SchedulingService/GetDoctorAppointments"
+	AppointmentService_GetDoctorAppointments_FullMethodName = "/appointmentservicepb.AppointmentService/GetDoctorAppointments"
 )
 
-// SchedulingServiceClient is the client API for SchedulingService service.
+// AppointmentServiceClient is the client API for AppointmentService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type SchedulingServiceClient interface {
+type AppointmentServiceClient interface {
 	GetDoctorAppointments(ctx context.Context, in *GetDoctorAppointmentsRequest, opts ...grpc.CallOption) (*GetDoctorAppointmentsResponse, error)
 }
 
-type schedulingServiceClient struct {
+type appointmentServiceClient struct {
 	cc grpc.ClientConnInterface
 }
 
-func NewSchedulingServiceClient(cc grpc.ClientConnInterface) SchedulingServiceClient {
-	return &schedulingServiceClient{cc}
+func NewAppointmentServiceClient(cc grpc.ClientConnInterface) AppointmentServiceClient {
+	return &appointmentServiceClient{cc}
 }
 
-func (c *schedulingServiceClient) GetDoctorAppointments(ctx context.Context, in *GetDoctorAppointmentsRequest, opts ...grpc.CallOption) (*GetDoctorAppointmentsResponse, error) {
+func (c *appointmentServiceClient) GetDoctorAppointments(ctx context.Context, in *GetDoctorAppointmentsRequest, opts ...grpc.CallOption) (*GetDoctorAppointmentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
 	out := new(GetDoctorAppointmentsResponse)
-	err := c.cc.Invoke(ctx, SchedulingService_GetDoctorAppointments_FullMethodName, in, out, cOpts...)
+	err := c.cc.Invoke(ctx, AppointmentService_GetDoctorAppointments_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// SchedulingServiceServer is the server API for SchedulingService service.
-// All implementations must embed UnimplementedSchedulingServiceServer
+// AppointmentServiceServer is the server API for AppointmentService service.
+// All implementations must embed UnimplementedAppointmentServiceServer
 // for forward compatibility.
-type SchedulingServiceServer interface {
+type AppointmentServiceServer interface {
 	GetDoctorAppointments(context.Context, *GetDoctorAppointmentsRequest) (*GetDoctorAppointmentsResponse, error)
-	mustEmbedUnimplementedSchedulingServiceServer()
+	mustEmbedUnimplementedAppointmentServiceServer()
 }
 
-// UnimplementedSchedulingServiceServer must be embedded to have
+// UnimplementedAppointmentServiceServer must be embedded to have
 // forward compatible implementations.
 //
 // NOTE: this should be embedded by value instead of pointer to avoid a nil
 // pointer dereference when methods are called.
-type UnimplementedSchedulingServiceServer struct{}
+type UnimplementedAppointmentServiceServer struct{}
 
-func (UnimplementedSchedulingServiceServer) GetDoctorAppointments(context.Context, *GetDoctorAppointmentsRequest) (*GetDoctorAppointmentsResponse, error) {
+func (UnimplementedAppointmentServiceServer) GetDoctorAppointments(context.Context, *GetDoctorAppointmentsRequest) (*GetDoctorAppointmentsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDoctorAppointments not implemented")
 }
-func (UnimplementedSchedulingServiceServer) mustEmbedUnimplementedSchedulingServiceServer() {}
-func (UnimplementedSchedulingServiceServer) testEmbeddedByValue()                           {}
+func (UnimplementedAppointmentServiceServer) mustEmbedUnimplementedAppointmentServiceServer() {}
+func (UnimplementedAppointmentServiceServer) testEmbeddedByValue()                            {}
 
-// UnsafeSchedulingServiceServer may be embedded to opt out of forward compatibility for this service.
-// Use of this interface is not recommended, as added methods to SchedulingServiceServer will
+// UnsafeAppointmentServiceServer may be embedded to opt out of forward compatibility for this service.
+// Use of this interface is not recommended, as added methods to AppointmentServiceServer will
 // result in compilation errors.
-type UnsafeSchedulingServiceServer interface {
-	mustEmbedUnimplementedSchedulingServiceServer()
+type UnsafeAppointmentServiceServer interface {
+	mustEmbedUnimplementedAppointmentServiceServer()
 }
 
-func RegisterSchedulingServiceServer(s grpc.ServiceRegistrar, srv SchedulingServiceServer) {
-	// If the following call pancis, it indicates UnimplementedSchedulingServiceServer was
+func RegisterAppointmentServiceServer(s grpc.ServiceRegistrar, srv AppointmentServiceServer) {
+	// If the following call pancis, it indicates UnimplementedAppointmentServiceServer was
 	// embedded by pointer and is nil.  This will cause panics if an
 	// unimplemented method is ever invoked, so we test this at initialization
 	// time to prevent it from happening at runtime later due to I/O.
 	if t, ok := srv.(interface{ testEmbeddedByValue() }); ok {
 		t.testEmbeddedByValue()
 	}
-	s.RegisterService(&SchedulingService_ServiceDesc, srv)
+	s.RegisterService(&AppointmentService_ServiceDesc, srv)
 }
 
-func _SchedulingService_GetDoctorAppointments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+func _AppointmentService_GetDoctorAppointments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
 	in := new(GetDoctorAppointmentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SchedulingServiceServer).GetDoctorAppointments(ctx, in)
+		return srv.(AppointmentServiceServer).GetDoctorAppointments(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SchedulingService_GetDoctorAppointments_FullMethodName,
+		FullMethod: AppointmentService_GetDoctorAppointments_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SchedulingServiceServer).GetDoctorAppointments(ctx, req.(*GetDoctorAppointmentsRequest))
+		return srv.(AppointmentServiceServer).GetDoctorAppointments(ctx, req.(*GetDoctorAppointmentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
 
-// SchedulingService_ServiceDesc is the grpc.ServiceDesc for SchedulingService service.
+// AppointmentService_ServiceDesc is the grpc.ServiceDesc for AppointmentService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
-var SchedulingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "appointmentservicepb.SchedulingService",
-	HandlerType: (*SchedulingServiceServer)(nil),
+var AppointmentService_ServiceDesc = grpc.ServiceDesc{
+	ServiceName: "appointmentservicepb.AppointmentService",
+	HandlerType: (*AppointmentServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
 			MethodName: "GetDoctorAppointments",
-			Handler:    _SchedulingService_GetDoctorAppointments_Handler,
+			Handler:    _AppointmentService_GetDoctorAppointments_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

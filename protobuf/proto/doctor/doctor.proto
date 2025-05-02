@@ -6,7 +6,7 @@ import "google/protobuf/timestamp.proto";
 
 option go_package="./doctorservicepb;doctorservicepb";
 
-service SchedulingService {
+service DoctorScheduleService {
     rpc GetDoctorSchedule(GetDoctorScheduleRequest) returns (GetDoctorScheduleResponse){}
 }
 

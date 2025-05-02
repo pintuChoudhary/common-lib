@@ -465,8 +465,8 @@ const file_appointment_appointment_proto_rawDesc = "" +
 	"\x13APPOINTMENT_PENDING\x10\x00\x12\x19\n" +
 	"\x15APPOINTMENT_CONFIRMED\x10\x01\x12\x19\n" +
 	"\x15APPOINTMENT_CANCELLED\x10\x02\x12\x1b\n" +
-	"\x17APPOINTMENT_RESCHEDULED\x10\x032\x98\x01\n" +
-	"\x11SchedulingService\x12\x82\x01\n" +
+	"\x17APPOINTMENT_RESCHEDULED\x10\x032\x99\x01\n" +
+	"\x12AppointmentService\x12\x82\x01\n" +
 	"\x15GetDoctorAppointments\x122.appointmentservicepb.GetDoctorAppointmentsRequest\x1a3.appointmentservicepb.GetDoctorAppointmentsResponse\"\x00B-Z+./appointmentservicepb;appointmentservicepbb\x06proto3"
 
 var (
@@ -503,8 +503,8 @@ var file_appointment_appointment_proto_depIdxs = []int32{
 	1,  // 7: appointmentservicepb.Appointment.status:type_name -> appointmentservicepb.AppointmentStatus
 	6,  // 8: appointmentservicepb.Appointment.createdAt:type_name -> google.protobuf.Timestamp
 	6,  // 9: appointmentservicepb.Appointment.updatedAt:type_name -> google.protobuf.Timestamp
-	3,  // 10: appointmentservicepb.SchedulingService.GetDoctorAppointments:input_type -> appointmentservicepb.GetDoctorAppointmentsRequest
-	4,  // 11: appointmentservicepb.SchedulingService.GetDoctorAppointments:output_type -> appointmentservicepb.GetDoctorAppointmentsResponse
+	3,  // 10: appointmentservicepb.AppointmentService.GetDoctorAppointments:input_type -> appointmentservicepb.GetDoctorAppointmentsRequest
+	4,  // 11: appointmentservicepb.AppointmentService.GetDoctorAppointments:output_type -> appointmentservicepb.GetDoctorAppointmentsResponse
 	11, // [11:12] is the sub-list for method output_type
 	10, // [10:11] is the sub-list for method input_type
 	10, // [10:10] is the sub-list for extension type_name
