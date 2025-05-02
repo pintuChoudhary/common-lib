@@ -71,21 +71,21 @@ func (OperationStatus) EnumDescriptor() ([]byte, []int) {
 	return file_doctor_doctor_proto_rawDescGZIP(), []int{0}
 }
 
-type WeeklySchedule_DayOfWeek int32
+type DayOfWeek int32
 
 const (
-	WeeklySchedule_MONDAY    WeeklySchedule_DayOfWeek = 0
-	WeeklySchedule_TUESDAY   WeeklySchedule_DayOfWeek = 1
-	WeeklySchedule_WEDNESDAY WeeklySchedule_DayOfWeek = 2
-	WeeklySchedule_THURSDAY  WeeklySchedule_DayOfWeek = 3
-	WeeklySchedule_FRIDAY    WeeklySchedule_DayOfWeek = 4
-	WeeklySchedule_SATURDAY  WeeklySchedule_DayOfWeek = 5
-	WeeklySchedule_SUNDAY    WeeklySchedule_DayOfWeek = 6
+	DayOfWeek_MONDAY    DayOfWeek = 0
+	DayOfWeek_TUESDAY   DayOfWeek = 1
+	DayOfWeek_WEDNESDAY DayOfWeek = 2
+	DayOfWeek_THURSDAY  DayOfWeek = 3
+	DayOfWeek_FRIDAY    DayOfWeek = 4
+	DayOfWeek_SATURDAY  DayOfWeek = 5
+	DayOfWeek_SUNDAY    DayOfWeek = 6
 )
 
-// Enum value maps for WeeklySchedule_DayOfWeek.
+// Enum value maps for DayOfWeek.
 var (
-	WeeklySchedule_DayOfWeek_name = map[int32]string{
+	DayOfWeek_name = map[int32]string{
 		0: "MONDAY",
 		1: "TUESDAY",
 		2: "WEDNESDAY",
@@ -94,7 +94,7 @@ var (
 		5: "SATURDAY",
 		6: "SUNDAY",
 	}
-	WeeklySchedule_DayOfWeek_value = map[string]int32{
+	DayOfWeek_value = map[string]int32{
 		"MONDAY":    0,
 		"TUESDAY":   1,
 		"WEDNESDAY": 2,
@@ -105,31 +105,31 @@ var (
 	}
 )
 
-func (x WeeklySchedule_DayOfWeek) Enum() *WeeklySchedule_DayOfWeek {
-	p := new(WeeklySchedule_DayOfWeek)
+func (x DayOfWeek) Enum() *DayOfWeek {
+	p := new(DayOfWeek)
 	*p = x
 	return p
 }
 
-func (x WeeklySchedule_DayOfWeek) String() string {
+func (x DayOfWeek) String() string {
 	return protoimpl.X.EnumStringOf(x.Descriptor(), protoreflect.EnumNumber(x))
 }
 
-func (WeeklySchedule_DayOfWeek) Descriptor() protoreflect.EnumDescriptor {
+func (DayOfWeek) Descriptor() protoreflect.EnumDescriptor {
 	return file_doctor_doctor_proto_enumTypes[1].Descriptor()
 }
 
-func (WeeklySchedule_DayOfWeek) Type() protoreflect.EnumType {
+func (DayOfWeek) Type() protoreflect.EnumType {
 	return &file_doctor_doctor_proto_enumTypes[1]
 }
 
-func (x WeeklySchedule_DayOfWeek) Number() protoreflect.EnumNumber {
+func (x DayOfWeek) Number() protoreflect.EnumNumber {
 	return protoreflect.EnumNumber(x)
 }
 
-// Deprecated: Use WeeklySchedule_DayOfWeek.Descriptor instead.
-func (WeeklySchedule_DayOfWeek) EnumDescriptor() ([]byte, []int) {
-	return file_doctor_doctor_proto_rawDescGZIP(), []int{3, 0}
+// Deprecated: Use DayOfWeek.Descriptor instead.
+func (DayOfWeek) EnumDescriptor() ([]byte, []int) {
+	return file_doctor_doctor_proto_rawDescGZIP(), []int{1}
 }
 
 type Status struct {
@@ -321,10 +321,10 @@ func (x *GetDoctorScheduleResponse) GetRequestStatus() *Status {
 }
 
 type WeeklySchedule struct {
-	state         protoimpl.MessageState   `protogen:"open.v1"`
-	DayOfWeek     WeeklySchedule_DayOfWeek `protobuf:"varint,1,opt,name=dayOfWeek,proto3,enum=doctorservicepb.WeeklySchedule_DayOfWeek" json:"dayOfWeek,omitempty"`
-	StartTime     string                   `protobuf:"bytes,2,opt,name=startTime,proto3" json:"startTime,omitempty"`
-	EndTime       string                   `protobuf:"bytes,3,opt,name=endTime,proto3" json:"endTime,omitempty"`
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DayOfWeek     DayOfWeek              `protobuf:"varint,1,opt,name=dayOfWeek,proto3,enum=doctorservicepb.DayOfWeek" json:"dayOfWeek,omitempty"`
+	StartTime     string                 `protobuf:"bytes,2,opt,name=startTime,proto3" json:"startTime,omitempty"`
+	EndTime       string                 `protobuf:"bytes,3,opt,name=endTime,proto3" json:"endTime,omitempty"`
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -359,11 +359,11 @@ func (*WeeklySchedule) Descriptor() ([]byte, []int) {
 	return file_doctor_doctor_proto_rawDescGZIP(), []int{3}
 }
 
-func (x *WeeklySchedule) GetDayOfWeek() WeeklySchedule_DayOfWeek {
+func (x *WeeklySchedule) GetDayOfWeek() DayOfWeek {
 	if x != nil {
 		return x.DayOfWeek
 	}
-	return WeeklySchedule_MONDAY
+	return DayOfWeek_MONDAY
 }
 
 func (x *WeeklySchedule) GetStartTime() string {
@@ -489,22 +489,11 @@ const file_doctor_doctor_proto_rawDesc = "" +
 	"\fregularHours\x18\x02 \x03(\v2\x1f.doctorservicepb.WeeklyScheduleR\fregularHours\x12F\n" +
 	"\x0edoctorTimeOffs\x18\x03 \x03(\v2\x1e.doctorservicepb.DoctorTimeOffR\x0edoctorTimeOffs\x12\"\n" +
 	"\fslotDuration\x18\x04 \x01(\x05R\fslotDuration\x12=\n" +
-	"\rrequestStatus\x18\x05 \x01(\v2\x17.doctorservicepb.StatusR\rrequestStatus\"\xfa\x01\n" +
-	"\x0eWeeklySchedule\x12G\n" +
-	"\tdayOfWeek\x18\x01 \x01(\x0e2).doctorservicepb.WeeklySchedule.DayOfWeekR\tdayOfWeek\x12\x1c\n" +
+	"\rrequestStatus\x18\x05 \x01(\v2\x17.doctorservicepb.StatusR\rrequestStatus\"\x82\x01\n" +
+	"\x0eWeeklySchedule\x128\n" +
+	"\tdayOfWeek\x18\x01 \x01(\x0e2\x1a.doctorservicepb.DayOfWeekR\tdayOfWeek\x12\x1c\n" +
 	"\tstartTime\x18\x02 \x01(\tR\tstartTime\x12\x18\n" +
-	"\aendTime\x18\x03 \x01(\tR\aendTime\"g\n" +
-	"\tDayOfWeek\x12\n" +
-	"\n" +
-	"\x06MONDAY\x10\x00\x12\v\n" +
-	"\aTUESDAY\x10\x01\x12\r\n" +
-	"\tWEDNESDAY\x10\x02\x12\f\n" +
-	"\bTHURSDAY\x10\x03\x12\n" +
-	"\n" +
-	"\x06FRIDAY\x10\x04\x12\f\n" +
-	"\bSATURDAY\x10\x05\x12\n" +
-	"\n" +
-	"\x06SUNDAY\x10\x06\"\xb7\x02\n" +
+	"\aendTime\x18\x03 \x01(\tR\aendTime\"\xb7\x02\n" +
 	"\rDoctorTimeOff\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\bdoctorId\x18\x02 \x01(\tR\bdoctorId\x128\n" +
@@ -516,7 +505,18 @@ const file_doctor_doctor_proto_rawDesc = "" +
 	"\x0fOperationStatus\x12\x15\n" +
 	"\x11OPERATION_UNKNOWN\x10\x00\x12\x15\n" +
 	"\x11OPERATION_SUCCESS\x10\x01\x12\x15\n" +
-	"\x11OPERATION_FAILURE\x10\x022\x85\x01\n" +
+	"\x11OPERATION_FAILURE\x10\x02*g\n" +
+	"\tDayOfWeek\x12\n" +
+	"\n" +
+	"\x06MONDAY\x10\x00\x12\v\n" +
+	"\aTUESDAY\x10\x01\x12\r\n" +
+	"\tWEDNESDAY\x10\x02\x12\f\n" +
+	"\bTHURSDAY\x10\x03\x12\n" +
+	"\n" +
+	"\x06FRIDAY\x10\x04\x12\f\n" +
+	"\bSATURDAY\x10\x05\x12\n" +
+	"\n" +
+	"\x06SUNDAY\x10\x062\x85\x01\n" +
 	"\x15DoctorScheduleService\x12l\n" +
 	"\x11GetDoctorSchedule\x12).doctorservicepb.GetDoctorScheduleRequest\x1a*.doctorservicepb.GetDoctorScheduleResponse\"\x00B#Z!./doctorservicepb;doctorservicepbb\x06proto3"
 
@@ -536,7 +536,7 @@ var file_doctor_doctor_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
 var file_doctor_doctor_proto_msgTypes = make([]protoimpl.MessageInfo, 5)
 var file_doctor_doctor_proto_goTypes = []any{
 	(OperationStatus)(0),              // 0: doctorservicepb.OperationStatus
-	(WeeklySchedule_DayOfWeek)(0),     // 1: doctorservicepb.WeeklySchedule.DayOfWeek
+	(DayOfWeek)(0),                    // 1: doctorservicepb.DayOfWeek
 	(*Status)(nil),                    // 2: doctorservicepb.Status
 	(*GetDoctorScheduleRequest)(nil),  // 3: doctorservicepb.GetDoctorScheduleRequest
 	(*GetDoctorScheduleResponse)(nil), // 4: doctorservicepb.GetDoctorScheduleResponse
@@ -551,7 +551,7 @@ var file_doctor_doctor_proto_depIdxs = []int32{
 	5,  // 3: doctorservicepb.GetDoctorScheduleResponse.regularHours:type_name -> doctorservicepb.WeeklySchedule
 	6,  // 4: doctorservicepb.GetDoctorScheduleResponse.doctorTimeOffs:type_name -> doctorservicepb.DoctorTimeOff
 	2,  // 5: doctorservicepb.GetDoctorScheduleResponse.requestStatus:type_name -> doctorservicepb.Status
-	1,  // 6: doctorservicepb.WeeklySchedule.dayOfWeek:type_name -> doctorservicepb.WeeklySchedule.DayOfWeek
+	1,  // 6: doctorservicepb.WeeklySchedule.dayOfWeek:type_name -> doctorservicepb.DayOfWeek
 	7,  // 7: doctorservicepb.DoctorTimeOff.startTime:type_name -> google.protobuf.Timestamp
 	7,  // 8: doctorservicepb.DoctorTimeOff.endTime:type_name -> google.protobuf.Timestamp
 	7,  // 9: doctorservicepb.DoctorTimeOff.createdAt:type_name -> google.protobuf.Timestamp

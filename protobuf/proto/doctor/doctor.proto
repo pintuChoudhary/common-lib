@@ -35,8 +35,7 @@ message GetDoctorScheduleResponse{
     Status requestStatus = 5;
 }
 
-message WeeklySchedule {
-  enum DayOfWeek {
+enum DayOfWeek {
     MONDAY = 0;
     TUESDAY = 1;
     WEDNESDAY = 2;
@@ -44,8 +43,9 @@ message WeeklySchedule {
     FRIDAY = 4;
     SATURDAY = 5;
     SUNDAY = 6;
-  }
+}
 
+message WeeklySchedule {
   DayOfWeek dayOfWeek = 1;
   string startTime = 2;
   string endTime = 3;
