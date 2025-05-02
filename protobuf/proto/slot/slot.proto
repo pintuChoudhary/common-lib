@@ -1,0 +1,62 @@
+syntax = "proto3";
+
+package schedulingservicepb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package="github.com/pintuChoudhary/common-lib/protobuf/gen/schedulingservicepb;schedulingservicepb";
+
+service SchedulingService {
+    rpc GetSlot(GetSlotRequest) returns (GetSlotResponse){}
+    rpc UpdateSlot(UpdateSlotRequest) returns (UpdateSlotResponse) {}
+}
+
+enum OperationStatus{
+    OPERATION_UNKNOWN = 0;
+    OPERATION_SUCCESS = 1;
+    OPERATION_FAILURE = 2;
+}
+
+message Status {
+    OperationStatus status = 1;
+    string error = 2;
+}
+
+enum SlotStatus {
+    SLOT_UNKNOWN_STATUS = 0;
+    SLOT_UNAVAILABLE = 1;
+    SLOT_AVAILABLE = 2;
+    SLOT_BOOKED = 3;
+    SLOT_CANCELLED = 4;
+    SLOT_COMPLETED = 5;
+    SLOT_EXPIRED = 6;
+}
+
+message GetSlotRequest{
+    string id = 1;
+}
+
+message GetSlotResponse{
+    Slot slot = 1;
+    Status responseStatus = 2;
+}
+
+message UpdateSlotRequest{
+    Slot slot = 1;
+}
+
+message UpdateSlotResponse{
+    Slot slot = 1;
+    Status responseStatus = 2;
+}
+
+message Slot {
+    string id = 1;
+    string doctorId = 2;
+    google.protobuf.Timestamp date = 3;
+    string startTime = 4;
+    string endTime = 5;
+    SlotStatus status = 6;
+    google.protobuf.Timestamp createdAt = 7;
+    google.protobuf.Timestamp updatedAt = 8;
+}
