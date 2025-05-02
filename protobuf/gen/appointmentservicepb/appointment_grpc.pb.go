@@ -2,9 +2,9 @@
 // versions:
 // - protoc-gen-go-grpc v1.5.1
 // - protoc             v3.21.12
-// source: slot/slot.proto
+// source: appointment/appointment.proto
 
-package schedulingservicepb
+package appointmentservicepb
 
 import (
 	context "context"
@@ -19,16 +19,14 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	SchedulingService_GetSlot_FullMethodName    = "/schedulingservicepb.SchedulingService/GetSlot"
-	SchedulingService_UpdateSlot_FullMethodName = "/schedulingservicepb.SchedulingService/UpdateSlot"
+	SchedulingService_GetDoctorAppointments_FullMethodName = "/appointmentservicepb.SchedulingService/GetDoctorAppointments"
 )
 
 // SchedulingServiceClient is the client API for SchedulingService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type SchedulingServiceClient interface {
-	GetSlot(ctx context.Context, in *GetSlotRequest, opts ...grpc.CallOption) (*GetSlotResponse, error)
-	UpdateSlot(ctx context.Context, in *UpdateSlotRequest, opts ...grpc.CallOption) (*UpdateSlotResponse, error)
+	GetDoctorAppointments(ctx context.Context, in *GetDoctorAppointmentsRequest, opts ...grpc.CallOption) (*GetDoctorAppointmentsResponse, error)
 }
 
 type schedulingServiceClient struct {
@@ -39,20 +37,10 @@ func NewSchedulingServiceClient(cc grpc.ClientConnInterface) SchedulingServiceCl
 	return &schedulingServiceClient{cc}
 }
 
-func (c *schedulingServiceClient) GetSlot(ctx context.Context, in *GetSlotRequest, opts ...grpc.CallOption) (*GetSlotResponse, error) {
+func (c *schedulingServiceClient) GetDoctorAppointments(ctx context.Context, in *GetDoctorAppointmentsRequest, opts ...grpc.CallOption) (*GetDoctorAppointmentsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetSlotResponse)
-	err := c.cc.Invoke(ctx, SchedulingService_GetSlot_FullMethodName, in, out, cOpts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *schedulingServiceClient) UpdateSlot(ctx context.Context, in *UpdateSlotRequest, opts ...grpc.CallOption) (*UpdateSlotResponse, error) {
-	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(UpdateSlotResponse)
-	err := c.cc.Invoke(ctx, SchedulingService_UpdateSlot_FullMethodName, in, out, cOpts...)
+	out := new(GetDoctorAppointmentsResponse)
+	err := c.cc.Invoke(ctx, SchedulingService_GetDoctorAppointments_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -63,8 +51,7 @@ func (c *schedulingServiceClient) UpdateSlot(ctx context.Context, in *UpdateSlot
 // All implementations must embed UnimplementedSchedulingServiceServer
 // for forward compatibility.
 type SchedulingServiceServer interface {
-	GetSlot(context.Context, *GetSlotRequest) (*GetSlotResponse, error)
-	UpdateSlot(context.Context, *UpdateSlotRequest) (*UpdateSlotResponse, error)
+	GetDoctorAppointments(context.Context, *GetDoctorAppointmentsRequest) (*GetDoctorAppointmentsResponse, error)
 	mustEmbedUnimplementedSchedulingServiceServer()
 }
 
@@ -75,11 +62,8 @@ type SchedulingServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedSchedulingServiceServer struct{}
 
-func (UnimplementedSchedulingServiceServer) GetSlot(context.Context, *GetSlotRequest) (*GetSlotResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetSlot not implemented")
-}
-func (UnimplementedSchedulingServiceServer) UpdateSlot(context.Context, *UpdateSlotRequest) (*UpdateSlotResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method UpdateSlot not implemented")
+func (UnimplementedSchedulingServiceServer) GetDoctorAppointments(context.Context, *GetDoctorAppointmentsRequest) (*GetDoctorAppointmentsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDoctorAppointments not implemented")
 }
 func (UnimplementedSchedulingServiceServer) mustEmbedUnimplementedSchedulingServiceServer() {}
 func (UnimplementedSchedulingServiceServer) testEmbeddedByValue()                           {}
@@ -102,38 +86,20 @@ func RegisterSchedulingServiceServer(s grpc.ServiceRegistrar, srv SchedulingServ
 	s.RegisterService(&SchedulingService_ServiceDesc, srv)
 }
 
-func _SchedulingService_GetSlot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetSlotRequest)
+func _SchedulingService_GetDoctorAppointments_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDoctorAppointmentsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(SchedulingServiceServer).GetSlot(ctx, in)
+		return srv.(SchedulingServiceServer).GetDoctorAppointments(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: SchedulingService_GetSlot_FullMethodName,
+		FullMethod: SchedulingService_GetDoctorAppointments_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SchedulingServiceServer).GetSlot(ctx, req.(*GetSlotRequest))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _SchedulingService_UpdateSlot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UpdateSlotRequest)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(SchedulingServiceServer).UpdateSlot(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: SchedulingService_UpdateSlot_FullMethodName,
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(SchedulingServiceServer).UpdateSlot(ctx, req.(*UpdateSlotRequest))
+		return srv.(SchedulingServiceServer).GetDoctorAppointments(ctx, req.(*GetDoctorAppointmentsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -142,18 +108,14 @@ func _SchedulingService_UpdateSlot_Handler(srv interface{}, ctx context.Context,
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
 var SchedulingService_ServiceDesc = grpc.ServiceDesc{
-	ServiceName: "schedulingservicepb.SchedulingService",
+	ServiceName: "appointmentservicepb.SchedulingService",
 	HandlerType: (*SchedulingServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetSlot",
-			Handler:    _SchedulingService_GetSlot_Handler,
-		},
-		{
-			MethodName: "UpdateSlot",
-			Handler:    _SchedulingService_UpdateSlot_Handler,
+			MethodName: "GetDoctorAppointments",
+			Handler:    _SchedulingService_GetDoctorAppointments_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "slot/slot.proto",
+	Metadata: "appointment/appointment.proto",
 }

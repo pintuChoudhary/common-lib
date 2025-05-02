@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package appointmentservicepb;
+
+import "google/protobuf/timestamp.proto";
+
+option go_package="./appointmentservicepb;appointmentservicepb";
+
+service SchedulingService {
+    rpc GetDoctorAppointments(GetDoctorAppointmentsRequest) returns (GetDoctorAppointmentsResponse){}
+}
+
+enum OperationStatus{
+    OPERATION_UNKNOWN = 0;
+    OPERATION_SUCCESS = 1;
+    OPERATION_FAILURE = 2;
+}
+
+message Status {
+    OperationStatus status = 1;
+    string error = 2;
+}
+
+enum AppointmentStatus{
+    APPOINTMENT_PENDING = 0;
+    APPOINTMENT_CONFIRMED = 1;
+    APPOINTMENT_CANCELLED = 2;
+    APPOINTMENT_RESCHEDULED = 3;
+}
+
+message GetDoctorAppointmentsRequest{
+    string id = 1;
+    AppointmentStatus appointmentStatus = 2;
+    google.protobuf.Timestamp startTime = 3;
+    google.protobuf.Timestamp endTime = 4;
+}
+
+message GetDoctorAppointmentsResponse{
+    string id = 1;
+    repeated Appointment appointments = 2;
+    Status requestStatus = 5;
+}
+
+message Appointment {
+  string id = 1;
+  string doctorId = 2;
+  string patientId = 3;
+  string slotId = 4;
+  string reason = 5;
+  google.protobuf.Timestamp date = 6;
+  string startTime = 7;
+  string endTime = 8;
+  AppointmentStatus status = 9;
+  google.protobuf.Timestamp createdAt = 10;
+  google.protobuf.Timestamp updatedAt = 11;
+}
