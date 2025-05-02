@@ -376,6 +376,134 @@ func (x *UpdateSlotResponse) GetResponseStatus() *Status {
 	return nil
 }
 
+type DeleteManySlotRequest struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	DoctorId      string                 `protobuf:"bytes,1,opt,name=doctorId,proto3" json:"doctorId,omitempty"`
+	Date          *timestamppb.Timestamp `protobuf:"bytes,2,opt,name=date,proto3" json:"date,omitempty"`
+	Status        SlotStatus             `protobuf:"varint,3,opt,name=status,proto3,enum=schedulingservicepb.SlotStatus" json:"status,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteManySlotRequest) Reset() {
+	*x = DeleteManySlotRequest{}
+	mi := &file_slot_slot_proto_msgTypes[5]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteManySlotRequest) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteManySlotRequest) ProtoMessage() {}
+
+func (x *DeleteManySlotRequest) ProtoReflect() protoreflect.Message {
+	mi := &file_slot_slot_proto_msgTypes[5]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteManySlotRequest.ProtoReflect.Descriptor instead.
+func (*DeleteManySlotRequest) Descriptor() ([]byte, []int) {
+	return file_slot_slot_proto_rawDescGZIP(), []int{5}
+}
+
+func (x *DeleteManySlotRequest) GetDoctorId() string {
+	if x != nil {
+		return x.DoctorId
+	}
+	return ""
+}
+
+func (x *DeleteManySlotRequest) GetDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.Date
+	}
+	return nil
+}
+
+func (x *DeleteManySlotRequest) GetStatus() SlotStatus {
+	if x != nil {
+		return x.Status
+	}
+	return SlotStatus_SLOT_UNKNOWN_STATUS
+}
+
+type DeleteManySlotResponse struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	MinDate       *timestamppb.Timestamp `protobuf:"bytes,1,opt,name=minDate,proto3" json:"minDate,omitempty"`
+	MinStartTime  string                 `protobuf:"bytes,2,opt,name=minStartTime,proto3" json:"minStartTime,omitempty"`
+	MaxDate       *timestamppb.Timestamp `protobuf:"bytes,3,opt,name=maxDate,proto3" json:"maxDate,omitempty"`
+	MaxEndTime    string                 `protobuf:"bytes,4,opt,name=maxEndTime,proto3" json:"maxEndTime,omitempty"`
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *DeleteManySlotResponse) Reset() {
+	*x = DeleteManySlotResponse{}
+	mi := &file_slot_slot_proto_msgTypes[6]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *DeleteManySlotResponse) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*DeleteManySlotResponse) ProtoMessage() {}
+
+func (x *DeleteManySlotResponse) ProtoReflect() protoreflect.Message {
+	mi := &file_slot_slot_proto_msgTypes[6]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use DeleteManySlotResponse.ProtoReflect.Descriptor instead.
+func (*DeleteManySlotResponse) Descriptor() ([]byte, []int) {
+	return file_slot_slot_proto_rawDescGZIP(), []int{6}
+}
+
+func (x *DeleteManySlotResponse) GetMinDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.MinDate
+	}
+	return nil
+}
+
+func (x *DeleteManySlotResponse) GetMinStartTime() string {
+	if x != nil {
+		return x.MinStartTime
+	}
+	return ""
+}
+
+func (x *DeleteManySlotResponse) GetMaxDate() *timestamppb.Timestamp {
+	if x != nil {
+		return x.MaxDate
+	}
+	return nil
+}
+
+func (x *DeleteManySlotResponse) GetMaxEndTime() string {
+	if x != nil {
+		return x.MaxEndTime
+	}
+	return ""
+}
+
 type Slot struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Id            string                 `protobuf:"bytes,1,opt,name=id,proto3" json:"id,omitempty"`
@@ -392,7 +520,7 @@ type Slot struct {
 
 func (x *Slot) Reset() {
 	*x = Slot{}
-	mi := &file_slot_slot_proto_msgTypes[5]
+	mi := &file_slot_slot_proto_msgTypes[7]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -404,7 +532,7 @@ func (x *Slot) String() string {
 func (*Slot) ProtoMessage() {}
 
 func (x *Slot) ProtoReflect() protoreflect.Message {
-	mi := &file_slot_slot_proto_msgTypes[5]
+	mi := &file_slot_slot_proto_msgTypes[7]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -417,7 +545,7 @@ func (x *Slot) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Slot.ProtoReflect.Descriptor instead.
 func (*Slot) Descriptor() ([]byte, []int) {
-	return file_slot_slot_proto_rawDescGZIP(), []int{5}
+	return file_slot_slot_proto_rawDescGZIP(), []int{7}
 }
 
 func (x *Slot) GetId() string {
@@ -493,7 +621,18 @@ const file_slot_slot_proto_rawDesc = "" +
 	"\x04slot\x18\x01 \x01(\v2\x19.schedulingservicepb.SlotR\x04slot\"\x88\x01\n" +
 	"\x12UpdateSlotResponse\x12-\n" +
 	"\x04slot\x18\x01 \x01(\v2\x19.schedulingservicepb.SlotR\x04slot\x12C\n" +
-	"\x0eresponseStatus\x18\x02 \x01(\v2\x1b.schedulingservicepb.StatusR\x0eresponseStatus\"\xc7\x02\n" +
+	"\x0eresponseStatus\x18\x02 \x01(\v2\x1b.schedulingservicepb.StatusR\x0eresponseStatus\"\x9c\x01\n" +
+	"\x15DeleteManySlotRequest\x12\x1a\n" +
+	"\bdoctorId\x18\x01 \x01(\tR\bdoctorId\x12.\n" +
+	"\x04date\x18\x02 \x01(\v2\x1a.google.protobuf.TimestampR\x04date\x127\n" +
+	"\x06status\x18\x03 \x01(\x0e2\x1f.schedulingservicepb.SlotStatusR\x06status\"\xc8\x01\n" +
+	"\x16DeleteManySlotResponse\x124\n" +
+	"\aminDate\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\aminDate\x12\"\n" +
+	"\fminStartTime\x18\x02 \x01(\tR\fminStartTime\x124\n" +
+	"\amaxDate\x18\x03 \x01(\v2\x1a.google.protobuf.TimestampR\amaxDate\x12\x1e\n" +
+	"\n" +
+	"maxEndTime\x18\x04 \x01(\tR\n" +
+	"maxEndTime\"\xc7\x02\n" +
 	"\x04Slot\x12\x0e\n" +
 	"\x02id\x18\x01 \x01(\tR\x02id\x12\x1a\n" +
 	"\bdoctorId\x18\x02 \x01(\tR\bdoctorId\x12.\n" +
@@ -515,11 +654,12 @@ const file_slot_slot_proto_rawDesc = "" +
 	"\vSLOT_BOOKED\x10\x03\x12\x12\n" +
 	"\x0eSLOT_CANCELLED\x10\x04\x12\x12\n" +
 	"\x0eSLOT_COMPLETED\x10\x05\x12\x10\n" +
-	"\fSLOT_EXPIRED\x10\x062\xcc\x01\n" +
+	"\fSLOT_EXPIRED\x10\x062\xb9\x02\n" +
 	"\x11SchedulingService\x12V\n" +
 	"\aGetSlot\x12#.schedulingservicepb.GetSlotRequest\x1a$.schedulingservicepb.GetSlotResponse\"\x00\x12_\n" +
 	"\n" +
-	"UpdateSlot\x12&.schedulingservicepb.UpdateSlotRequest\x1a'.schedulingservicepb.UpdateSlotResponse\"\x00B+Z)./schedulingservicepb;schedulingservicepbb\x06proto3"
+	"UpdateSlot\x12&.schedulingservicepb.UpdateSlotRequest\x1a'.schedulingservicepb.UpdateSlotResponse\"\x00\x12k\n" +
+	"\x0eDeleteManySlot\x12*.schedulingservicepb.DeleteManySlotRequest\x1a+.schedulingservicepb.DeleteManySlotResponse\"\x00B+Z)./schedulingservicepb;schedulingservicepbb\x06proto3"
 
 var (
 	file_slot_slot_proto_rawDescOnce sync.Once
@@ -534,38 +674,46 @@ func file_slot_slot_proto_rawDescGZIP() []byte {
 }
 
 var file_slot_slot_proto_enumTypes = make([]protoimpl.EnumInfo, 2)
-var file_slot_slot_proto_msgTypes = make([]protoimpl.MessageInfo, 6)
+var file_slot_slot_proto_msgTypes = make([]protoimpl.MessageInfo, 8)
 var file_slot_slot_proto_goTypes = []any{
-	(OperationStatus)(0),          // 0: schedulingservicepb.OperationStatus
-	(SlotStatus)(0),               // 1: schedulingservicepb.SlotStatus
-	(*Status)(nil),                // 2: schedulingservicepb.Status
-	(*GetSlotRequest)(nil),        // 3: schedulingservicepb.GetSlotRequest
-	(*GetSlotResponse)(nil),       // 4: schedulingservicepb.GetSlotResponse
-	(*UpdateSlotRequest)(nil),     // 5: schedulingservicepb.UpdateSlotRequest
-	(*UpdateSlotResponse)(nil),    // 6: schedulingservicepb.UpdateSlotResponse
-	(*Slot)(nil),                  // 7: schedulingservicepb.Slot
-	(*timestamppb.Timestamp)(nil), // 8: google.protobuf.Timestamp
+	(OperationStatus)(0),           // 0: schedulingservicepb.OperationStatus
+	(SlotStatus)(0),                // 1: schedulingservicepb.SlotStatus
+	(*Status)(nil),                 // 2: schedulingservicepb.Status
+	(*GetSlotRequest)(nil),         // 3: schedulingservicepb.GetSlotRequest
+	(*GetSlotResponse)(nil),        // 4: schedulingservicepb.GetSlotResponse
+	(*UpdateSlotRequest)(nil),      // 5: schedulingservicepb.UpdateSlotRequest
+	(*UpdateSlotResponse)(nil),     // 6: schedulingservicepb.UpdateSlotResponse
+	(*DeleteManySlotRequest)(nil),  // 7: schedulingservicepb.DeleteManySlotRequest
+	(*DeleteManySlotResponse)(nil), // 8: schedulingservicepb.DeleteManySlotResponse
+	(*Slot)(nil),                   // 9: schedulingservicepb.Slot
+	(*timestamppb.Timestamp)(nil),  // 10: google.protobuf.Timestamp
 }
 var file_slot_slot_proto_depIdxs = []int32{
 	0,  // 0: schedulingservicepb.Status.status:type_name -> schedulingservicepb.OperationStatus
-	7,  // 1: schedulingservicepb.GetSlotResponse.slot:type_name -> schedulingservicepb.Slot
+	9,  // 1: schedulingservicepb.GetSlotResponse.slot:type_name -> schedulingservicepb.Slot
 	2,  // 2: schedulingservicepb.GetSlotResponse.responseStatus:type_name -> schedulingservicepb.Status
-	7,  // 3: schedulingservicepb.UpdateSlotRequest.slot:type_name -> schedulingservicepb.Slot
-	7,  // 4: schedulingservicepb.UpdateSlotResponse.slot:type_name -> schedulingservicepb.Slot
+	9,  // 3: schedulingservicepb.UpdateSlotRequest.slot:type_name -> schedulingservicepb.Slot
+	9,  // 4: schedulingservicepb.UpdateSlotResponse.slot:type_name -> schedulingservicepb.Slot
 	2,  // 5: schedulingservicepb.UpdateSlotResponse.responseStatus:type_name -> schedulingservicepb.Status
-	8,  // 6: schedulingservicepb.Slot.date:type_name -> google.protobuf.Timestamp
-	1,  // 7: schedulingservicepb.Slot.status:type_name -> schedulingservicepb.SlotStatus
-	8,  // 8: schedulingservicepb.Slot.createdAt:type_name -> google.protobuf.Timestamp
-	8,  // 9: schedulingservicepb.Slot.updatedAt:type_name -> google.protobuf.Timestamp
-	3,  // 10: schedulingservicepb.SchedulingService.GetSlot:input_type -> schedulingservicepb.GetSlotRequest
-	5,  // 11: schedulingservicepb.SchedulingService.UpdateSlot:input_type -> schedulingservicepb.UpdateSlotRequest
-	4,  // 12: schedulingservicepb.SchedulingService.GetSlot:output_type -> schedulingservicepb.GetSlotResponse
-	6,  // 13: schedulingservicepb.SchedulingService.UpdateSlot:output_type -> schedulingservicepb.UpdateSlotResponse
-	12, // [12:14] is the sub-list for method output_type
-	10, // [10:12] is the sub-list for method input_type
-	10, // [10:10] is the sub-list for extension type_name
-	10, // [10:10] is the sub-list for extension extendee
-	0,  // [0:10] is the sub-list for field type_name
+	10, // 6: schedulingservicepb.DeleteManySlotRequest.date:type_name -> google.protobuf.Timestamp
+	1,  // 7: schedulingservicepb.DeleteManySlotRequest.status:type_name -> schedulingservicepb.SlotStatus
+	10, // 8: schedulingservicepb.DeleteManySlotResponse.minDate:type_name -> google.protobuf.Timestamp
+	10, // 9: schedulingservicepb.DeleteManySlotResponse.maxDate:type_name -> google.protobuf.Timestamp
+	10, // 10: schedulingservicepb.Slot.date:type_name -> google.protobuf.Timestamp
+	1,  // 11: schedulingservicepb.Slot.status:type_name -> schedulingservicepb.SlotStatus
+	10, // 12: schedulingservicepb.Slot.createdAt:type_name -> google.protobuf.Timestamp
+	10, // 13: schedulingservicepb.Slot.updatedAt:type_name -> google.protobuf.Timestamp
+	3,  // 14: schedulingservicepb.SchedulingService.GetSlot:input_type -> schedulingservicepb.GetSlotRequest
+	5,  // 15: schedulingservicepb.SchedulingService.UpdateSlot:input_type -> schedulingservicepb.UpdateSlotRequest
+	7,  // 16: schedulingservicepb.SchedulingService.DeleteManySlot:input_type -> schedulingservicepb.DeleteManySlotRequest
+	4,  // 17: schedulingservicepb.SchedulingService.GetSlot:output_type -> schedulingservicepb.GetSlotResponse
+	6,  // 18: schedulingservicepb.SchedulingService.UpdateSlot:output_type -> schedulingservicepb.UpdateSlotResponse
+	8,  // 19: schedulingservicepb.SchedulingService.DeleteManySlot:output_type -> schedulingservicepb.DeleteManySlotResponse
+	17, // [17:20] is the sub-list for method output_type
+	14, // [14:17] is the sub-list for method input_type
+	14, // [14:14] is the sub-list for extension type_name
+	14, // [14:14] is the sub-list for extension extendee
+	0,  // [0:14] is the sub-list for field type_name
 }
 
 func init() { file_slot_slot_proto_init() }
@@ -579,7 +727,7 @@ func file_slot_slot_proto_init() {
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_slot_slot_proto_rawDesc), len(file_slot_slot_proto_rawDesc)),
 			NumEnums:      2,
-			NumMessages:   6,
+			NumMessages:   8,
 			NumExtensions: 0,
 			NumServices:   1,
 		},

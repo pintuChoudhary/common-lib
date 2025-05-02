@@ -9,6 +9,7 @@ option go_package="./schedulingservicepb;schedulingservicepb";
 service SchedulingService {
     rpc GetSlot(GetSlotRequest) returns (GetSlotResponse){}
     rpc UpdateSlot(UpdateSlotRequest) returns (UpdateSlotResponse) {}
+    rpc DeleteManySlot(DeleteManySlotRequest) returns (DeleteManySlotResponse) {}
 }
 
 enum OperationStatus{
@@ -48,6 +49,19 @@ message UpdateSlotRequest{
 message UpdateSlotResponse{
     Slot slot = 1;
     Status responseStatus = 2;
+}
+
+message DeleteManySlotRequest {
+    string doctorId = 1;
+    google.protobuf.Timestamp date = 2;
+    SlotStatus status = 3;
+}
+
+message DeleteManySlotResponse{
+    google.protobuf.Timestamp minDate = 1;
+    string minStartTime = 2;
+    google.protobuf.Timestamp maxDate = 3;
+    string maxEndTime = 4;
 }
 
 message Slot {
