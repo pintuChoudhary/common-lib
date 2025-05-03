@@ -19,7 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
-	DoctorScheduleService_GetDoctorIdList_FullMethodName   = "/doctorservicepb.DoctorScheduleService/GetDoctorIdList"
+	DoctorScheduleService_GetDoctors_FullMethodName        = "/doctorservicepb.DoctorScheduleService/GetDoctors"
 	DoctorScheduleService_GetDoctorSchedule_FullMethodName = "/doctorservicepb.DoctorScheduleService/GetDoctorSchedule"
 )
 
@@ -27,7 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DoctorScheduleServiceClient interface {
-	GetDoctorIdList(ctx context.Context, in *GetDoctorIdListRequest, opts ...grpc.CallOption) (*GetDoctorIdListResponse, error)
+	GetDoctors(ctx context.Context, in *GetDoctorsRequest, opts ...grpc.CallOption) (*GetDoctorsResponse, error)
 	GetDoctorSchedule(ctx context.Context, in *GetDoctorScheduleRequest, opts ...grpc.CallOption) (*GetDoctorScheduleResponse, error)
 }
 
@@ -39,10 +39,10 @@ func NewDoctorScheduleServiceClient(cc grpc.ClientConnInterface) DoctorScheduleS
 	return &doctorScheduleServiceClient{cc}
 }
 
-func (c *doctorScheduleServiceClient) GetDoctorIdList(ctx context.Context, in *GetDoctorIdListRequest, opts ...grpc.CallOption) (*GetDoctorIdListResponse, error) {
+func (c *doctorScheduleServiceClient) GetDoctors(ctx context.Context, in *GetDoctorsRequest, opts ...grpc.CallOption) (*GetDoctorsResponse, error) {
 	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
-	out := new(GetDoctorIdListResponse)
-	err := c.cc.Invoke(ctx, DoctorScheduleService_GetDoctorIdList_FullMethodName, in, out, cOpts...)
+	out := new(GetDoctorsResponse)
+	err := c.cc.Invoke(ctx, DoctorScheduleService_GetDoctors_FullMethodName, in, out, cOpts...)
 	if err != nil {
 		return nil, err
 	}
@@ -63,7 +63,7 @@ func (c *doctorScheduleServiceClient) GetDoctorSchedule(ctx context.Context, in 
 // All implementations must embed UnimplementedDoctorScheduleServiceServer
 // for forward compatibility.
 type DoctorScheduleServiceServer interface {
-	GetDoctorIdList(context.Context, *GetDoctorIdListRequest) (*GetDoctorIdListResponse, error)
+	GetDoctors(context.Context, *GetDoctorsRequest) (*GetDoctorsResponse, error)
 	GetDoctorSchedule(context.Context, *GetDoctorScheduleRequest) (*GetDoctorScheduleResponse, error)
 	mustEmbedUnimplementedDoctorScheduleServiceServer()
 }
@@ -75,8 +75,8 @@ type DoctorScheduleServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedDoctorScheduleServiceServer struct{}
 
-func (UnimplementedDoctorScheduleServiceServer) GetDoctorIdList(context.Context, *GetDoctorIdListRequest) (*GetDoctorIdListResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetDoctorIdList not implemented")
+func (UnimplementedDoctorScheduleServiceServer) GetDoctors(context.Context, *GetDoctorsRequest) (*GetDoctorsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDoctors not implemented")
 }
 func (UnimplementedDoctorScheduleServiceServer) GetDoctorSchedule(context.Context, *GetDoctorScheduleRequest) (*GetDoctorScheduleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDoctorSchedule not implemented")
@@ -102,20 +102,20 @@ func RegisterDoctorScheduleServiceServer(s grpc.ServiceRegistrar, srv DoctorSche
 	s.RegisterService(&DoctorScheduleService_ServiceDesc, srv)
 }
 
-func _DoctorScheduleService_GetDoctorIdList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(GetDoctorIdListRequest)
+func _DoctorScheduleService_GetDoctors_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDoctorsRequest)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(DoctorScheduleServiceServer).GetDoctorIdList(ctx, in)
+		return srv.(DoctorScheduleServiceServer).GetDoctors(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: DoctorScheduleService_GetDoctorIdList_FullMethodName,
+		FullMethod: DoctorScheduleService_GetDoctors_FullMethodName,
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(DoctorScheduleServiceServer).GetDoctorIdList(ctx, req.(*GetDoctorIdListRequest))
+		return srv.(DoctorScheduleServiceServer).GetDoctors(ctx, req.(*GetDoctorsRequest))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -146,8 +146,8 @@ var DoctorScheduleService_ServiceDesc = grpc.ServiceDesc{
 	HandlerType: (*DoctorScheduleServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "GetDoctorIdList",
-			Handler:    _DoctorScheduleService_GetDoctorIdList_Handler,
+			MethodName: "GetDoctors",
+			Handler:    _DoctorScheduleService_GetDoctors_Handler,
 		},
 		{
 			MethodName: "GetDoctorSchedule",

@@ -7,7 +7,7 @@ import "google/protobuf/timestamp.proto";
 option go_package="./doctorservicepb;doctorservicepb";
 
 service DoctorScheduleService {
-    rpc GetDoctorIdList(GetDoctorIdListRequest) returns (GetDoctorIdListResponse) {}
+    rpc GetDoctors(GetDoctorsRequest) returns (GetDoctorsResponse) {}
     rpc GetDoctorSchedule(GetDoctorScheduleRequest) returns (GetDoctorScheduleResponse){}
 }
 
@@ -22,10 +22,73 @@ message Status {
     string error = 2;
 }
 
-message GetDoctorIdListRequest{}
+message DoctorFilter {
+    string name = 1;
+    string email = 2;
+    string specialization = 3;
+    string city = 4;
+    bool availability = 5;
+}
 
-message GetDoctorIdListResponse{
-    repeated string ids = 1;
+
+message GetDoctorsRequest{
+    DoctorFilter doctorfilter = 1;
+}
+
+message GetDoctorsResponse{
+    repeated Doctor doctors = 1;
+}
+
+message Address {
+    string street = 1;
+    string city = 2;
+    string state = 3;
+    string zip = 4;
+    string country = 5;
+}
+
+message AppointmentType {
+    string value = 1;
+    enum Type {
+        REGULAR = 0;
+        ONLINE = 1;
+    }
+}
+
+message Procedure {
+    string name = 1;
+    string expertise = 2;
+    int32 performedCount = 3;
+}
+
+message Certification {
+    string title = 1;
+    string date = 2;
+}
+
+message Doctor {
+    string id = 1;
+    string name = 2;
+    string gender = 3;
+    Address address = 4;
+    string specialization = 5;
+    string license_id = 6;
+    string date_of_birth = 7;
+    string email = 8;
+    string education = 9;
+    repeated string languages = 10;
+    string experience = 11;
+    repeated Procedure procedures = 12;
+    repeated Certification certifications = 13;
+    string contact = 14;
+    repeated WeeklySchedule regularHours = 15;
+    repeated AppointmentType appointmentTypes = 16;
+    int32 slotDuration = 17;
+    bool availability = 18;
+    string password = 19;
+    google.protobuf.Timestamp createdAt = 20;
+    google.protobuf.Timestamp updatedAt = 21;
+    google.protobuf.Timestamp deletedAt = 22;
 }
 
 message GetDoctorScheduleRequest{
