@@ -22,6 +22,7 @@ const (
 	SchedulingService_GetSlot_FullMethodName        = "/schedulingservicepb.SchedulingService/GetSlot"
 	SchedulingService_UpdateSlot_FullMethodName     = "/schedulingservicepb.SchedulingService/UpdateSlot"
 	SchedulingService_DeleteManySlot_FullMethodName = "/schedulingservicepb.SchedulingService/DeleteManySlot"
+	SchedulingService_UpdateManySlot_FullMethodName = "/schedulingservicepb.SchedulingService/UpdateManySlot"
 )
 
 // SchedulingServiceClient is the client API for SchedulingService service.
@@ -31,6 +32,7 @@ type SchedulingServiceClient interface {
 	GetSlot(ctx context.Context, in *GetSlotRequest, opts ...grpc.CallOption) (*GetSlotResponse, error)
 	UpdateSlot(ctx context.Context, in *UpdateSlotRequest, opts ...grpc.CallOption) (*UpdateSlotResponse, error)
 	DeleteManySlot(ctx context.Context, in *DeleteManySlotRequest, opts ...grpc.CallOption) (*DeleteManySlotResponse, error)
+	UpdateManySlot(ctx context.Context, in *UpdateManySlotRequest, opts ...grpc.CallOption) (*UpdateManySlotResponse, error)
 }
 
 type schedulingServiceClient struct {
@@ -71,6 +73,16 @@ func (c *schedulingServiceClient) DeleteManySlot(ctx context.Context, in *Delete
 	return out, nil
 }
 
+func (c *schedulingServiceClient) UpdateManySlot(ctx context.Context, in *UpdateManySlotRequest, opts ...grpc.CallOption) (*UpdateManySlotResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(UpdateManySlotResponse)
+	err := c.cc.Invoke(ctx, SchedulingService_UpdateManySlot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SchedulingServiceServer is the server API for SchedulingService service.
 // All implementations must embed UnimplementedSchedulingServiceServer
 // for forward compatibility.
@@ -78,6 +90,7 @@ type SchedulingServiceServer interface {
 	GetSlot(context.Context, *GetSlotRequest) (*GetSlotResponse, error)
 	UpdateSlot(context.Context, *UpdateSlotRequest) (*UpdateSlotResponse, error)
 	DeleteManySlot(context.Context, *DeleteManySlotRequest) (*DeleteManySlotResponse, error)
+	UpdateManySlot(context.Context, *UpdateManySlotRequest) (*UpdateManySlotResponse, error)
 	mustEmbedUnimplementedSchedulingServiceServer()
 }
 
@@ -96,6 +109,9 @@ func (UnimplementedSchedulingServiceServer) UpdateSlot(context.Context, *UpdateS
 }
 func (UnimplementedSchedulingServiceServer) DeleteManySlot(context.Context, *DeleteManySlotRequest) (*DeleteManySlotResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteManySlot not implemented")
+}
+func (UnimplementedSchedulingServiceServer) UpdateManySlot(context.Context, *UpdateManySlotRequest) (*UpdateManySlotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateManySlot not implemented")
 }
 func (UnimplementedSchedulingServiceServer) mustEmbedUnimplementedSchedulingServiceServer() {}
 func (UnimplementedSchedulingServiceServer) testEmbeddedByValue()                           {}
@@ -172,6 +188,24 @@ func _SchedulingService_DeleteManySlot_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SchedulingService_UpdateManySlot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(UpdateManySlotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SchedulingServiceServer).UpdateManySlot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SchedulingService_UpdateManySlot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SchedulingServiceServer).UpdateManySlot(ctx, req.(*UpdateManySlotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SchedulingService_ServiceDesc is the grpc.ServiceDesc for SchedulingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -190,6 +224,10 @@ var SchedulingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "DeleteManySlot",
 			Handler:    _SchedulingService_DeleteManySlot_Handler,
+		},
+		{
+			MethodName: "UpdateManySlot",
+			Handler:    _SchedulingService_UpdateManySlot_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
