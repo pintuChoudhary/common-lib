@@ -23,6 +23,7 @@ const (
 	SchedulingService_UpdateSlot_FullMethodName     = "/schedulingservicepb.SchedulingService/UpdateSlot"
 	SchedulingService_DeleteManySlot_FullMethodName = "/schedulingservicepb.SchedulingService/DeleteManySlot"
 	SchedulingService_UpdateManySlot_FullMethodName = "/schedulingservicepb.SchedulingService/UpdateManySlot"
+	SchedulingService_RegenerateSlot_FullMethodName = "/schedulingservicepb.SchedulingService/RegenerateSlot"
 )
 
 // SchedulingServiceClient is the client API for SchedulingService service.
@@ -33,6 +34,7 @@ type SchedulingServiceClient interface {
 	UpdateSlot(ctx context.Context, in *UpdateSlotRequest, opts ...grpc.CallOption) (*UpdateSlotResponse, error)
 	DeleteManySlot(ctx context.Context, in *DeleteManySlotRequest, opts ...grpc.CallOption) (*DeleteManySlotResponse, error)
 	UpdateManySlot(ctx context.Context, in *UpdateManySlotRequest, opts ...grpc.CallOption) (*UpdateManySlotResponse, error)
+	RegenerateSlot(ctx context.Context, in *RegenerateSlotRequest, opts ...grpc.CallOption) (*RegenerateSlotResponse, error)
 }
 
 type schedulingServiceClient struct {
@@ -83,6 +85,16 @@ func (c *schedulingServiceClient) UpdateManySlot(ctx context.Context, in *Update
 	return out, nil
 }
 
+func (c *schedulingServiceClient) RegenerateSlot(ctx context.Context, in *RegenerateSlotRequest, opts ...grpc.CallOption) (*RegenerateSlotResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(RegenerateSlotResponse)
+	err := c.cc.Invoke(ctx, SchedulingService_RegenerateSlot_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // SchedulingServiceServer is the server API for SchedulingService service.
 // All implementations must embed UnimplementedSchedulingServiceServer
 // for forward compatibility.
@@ -91,6 +103,7 @@ type SchedulingServiceServer interface {
 	UpdateSlot(context.Context, *UpdateSlotRequest) (*UpdateSlotResponse, error)
 	DeleteManySlot(context.Context, *DeleteManySlotRequest) (*DeleteManySlotResponse, error)
 	UpdateManySlot(context.Context, *UpdateManySlotRequest) (*UpdateManySlotResponse, error)
+	RegenerateSlot(context.Context, *RegenerateSlotRequest) (*RegenerateSlotResponse, error)
 	mustEmbedUnimplementedSchedulingServiceServer()
 }
 
@@ -112,6 +125,9 @@ func (UnimplementedSchedulingServiceServer) DeleteManySlot(context.Context, *Del
 }
 func (UnimplementedSchedulingServiceServer) UpdateManySlot(context.Context, *UpdateManySlotRequest) (*UpdateManySlotResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateManySlot not implemented")
+}
+func (UnimplementedSchedulingServiceServer) RegenerateSlot(context.Context, *RegenerateSlotRequest) (*RegenerateSlotResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method RegenerateSlot not implemented")
 }
 func (UnimplementedSchedulingServiceServer) mustEmbedUnimplementedSchedulingServiceServer() {}
 func (UnimplementedSchedulingServiceServer) testEmbeddedByValue()                           {}
@@ -206,6 +222,24 @@ func _SchedulingService_UpdateManySlot_Handler(srv interface{}, ctx context.Cont
 	return interceptor(ctx, in, info, handler)
 }
 
+func _SchedulingService_RegenerateSlot_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(RegenerateSlotRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(SchedulingServiceServer).RegenerateSlot(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: SchedulingService_RegenerateSlot_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(SchedulingServiceServer).RegenerateSlot(ctx, req.(*RegenerateSlotRequest))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
 // SchedulingService_ServiceDesc is the grpc.ServiceDesc for SchedulingService service.
 // It's only intended for direct use with grpc.RegisterService,
 // and not to be introspected or modified (even as a copy)
@@ -228,6 +262,10 @@ var SchedulingService_ServiceDesc = grpc.ServiceDesc{
 		{
 			MethodName: "UpdateManySlot",
 			Handler:    _SchedulingService_UpdateManySlot_Handler,
+		},
+		{
+			MethodName: "RegenerateSlot",
+			Handler:    _SchedulingService_RegenerateSlot_Handler,
 		},
 	},
 	Streams:  []grpc.StreamDesc{},

@@ -11,6 +11,7 @@ service SchedulingService {
     rpc UpdateSlot(UpdateSlotRequest) returns (UpdateSlotResponse) {}
     rpc DeleteManySlot(DeleteManySlotRequest) returns (DeleteManySlotResponse) {}
     rpc UpdateManySlot(UpdateManySlotRequest) returns (UpdateManySlotResponse) {}
+    rpc RegenerateSlot(RegenerateSlotRequest) returns (RegenerateSlotResponse) {}
 }
 
 enum OperationStatus{
@@ -74,6 +75,16 @@ message UpdateManySlotRequest{
 }
 
 message UpdateManySlotResponse{
+    OperationStatus status = 1;
+}
+
+message RegenerateSlotRequest{
+    string doctorId = 1;
+    google.protobuf.Timestamp startTime = 2;
+    google.protobuf.Timestamp endTime = 3;
+}
+
+message RegenerateSlotResponse{
     OperationStatus status = 1;
 }
 
