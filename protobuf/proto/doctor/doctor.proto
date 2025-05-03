@@ -7,6 +7,7 @@ import "google/protobuf/timestamp.proto";
 option go_package="./doctorservicepb;doctorservicepb";
 
 service DoctorScheduleService {
+    rpc GetDoctorIdList(GetDoctorIdListRequest) returns (GetDoctorIdListResponse) {}
     rpc GetDoctorSchedule(GetDoctorScheduleRequest) returns (GetDoctorScheduleResponse){}
 }
 
@@ -19,6 +20,12 @@ enum OperationStatus{
 message Status {
     OperationStatus status = 1;
     string error = 2;
+}
+
+message GetDoctorIdListRequest{}
+
+message GetDoctorIdListResponse{
+    repeated string ids = 1;
 }
 
 message GetDoctorScheduleRequest{

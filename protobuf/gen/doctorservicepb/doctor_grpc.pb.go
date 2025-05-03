@@ -19,6 +19,7 @@ import (
 const _ = grpc.SupportPackageIsVersion9
 
 const (
+	DoctorScheduleService_GetDoctorIdList_FullMethodName   = "/doctorservicepb.DoctorScheduleService/GetDoctorIdList"
 	DoctorScheduleService_GetDoctorSchedule_FullMethodName = "/doctorservicepb.DoctorScheduleService/GetDoctorSchedule"
 )
 
@@ -26,6 +27,7 @@ const (
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type DoctorScheduleServiceClient interface {
+	GetDoctorIdList(ctx context.Context, in *GetDoctorIdListRequest, opts ...grpc.CallOption) (*GetDoctorIdListResponse, error)
 	GetDoctorSchedule(ctx context.Context, in *GetDoctorScheduleRequest, opts ...grpc.CallOption) (*GetDoctorScheduleResponse, error)
 }
 
@@ -35,6 +37,16 @@ type doctorScheduleServiceClient struct {
 
 func NewDoctorScheduleServiceClient(cc grpc.ClientConnInterface) DoctorScheduleServiceClient {
 	return &doctorScheduleServiceClient{cc}
+}
+
+func (c *doctorScheduleServiceClient) GetDoctorIdList(ctx context.Context, in *GetDoctorIdListRequest, opts ...grpc.CallOption) (*GetDoctorIdListResponse, error) {
+	cOpts := append([]grpc.CallOption{grpc.StaticMethod()}, opts...)
+	out := new(GetDoctorIdListResponse)
+	err := c.cc.Invoke(ctx, DoctorScheduleService_GetDoctorIdList_FullMethodName, in, out, cOpts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *doctorScheduleServiceClient) GetDoctorSchedule(ctx context.Context, in *GetDoctorScheduleRequest, opts ...grpc.CallOption) (*GetDoctorScheduleResponse, error) {
@@ -51,6 +63,7 @@ func (c *doctorScheduleServiceClient) GetDoctorSchedule(ctx context.Context, in 
 // All implementations must embed UnimplementedDoctorScheduleServiceServer
 // for forward compatibility.
 type DoctorScheduleServiceServer interface {
+	GetDoctorIdList(context.Context, *GetDoctorIdListRequest) (*GetDoctorIdListResponse, error)
 	GetDoctorSchedule(context.Context, *GetDoctorScheduleRequest) (*GetDoctorScheduleResponse, error)
 	mustEmbedUnimplementedDoctorScheduleServiceServer()
 }
@@ -62,6 +75,9 @@ type DoctorScheduleServiceServer interface {
 // pointer dereference when methods are called.
 type UnimplementedDoctorScheduleServiceServer struct{}
 
+func (UnimplementedDoctorScheduleServiceServer) GetDoctorIdList(context.Context, *GetDoctorIdListRequest) (*GetDoctorIdListResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetDoctorIdList not implemented")
+}
 func (UnimplementedDoctorScheduleServiceServer) GetDoctorSchedule(context.Context, *GetDoctorScheduleRequest) (*GetDoctorScheduleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDoctorSchedule not implemented")
 }
@@ -84,6 +100,24 @@ func RegisterDoctorScheduleServiceServer(s grpc.ServiceRegistrar, srv DoctorSche
 		t.testEmbeddedByValue()
 	}
 	s.RegisterService(&DoctorScheduleService_ServiceDesc, srv)
+}
+
+func _DoctorScheduleService_GetDoctorIdList_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetDoctorIdListRequest)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(DoctorScheduleServiceServer).GetDoctorIdList(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: DoctorScheduleService_GetDoctorIdList_FullMethodName,
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(DoctorScheduleServiceServer).GetDoctorIdList(ctx, req.(*GetDoctorIdListRequest))
+	}
+	return interceptor(ctx, in, info, handler)
 }
 
 func _DoctorScheduleService_GetDoctorSchedule_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -111,6 +145,10 @@ var DoctorScheduleService_ServiceDesc = grpc.ServiceDesc{
 	ServiceName: "doctorservicepb.DoctorScheduleService",
 	HandlerType: (*DoctorScheduleServiceServer)(nil),
 	Methods: []grpc.MethodDesc{
+		{
+			MethodName: "GetDoctorIdList",
+			Handler:    _DoctorScheduleService_GetDoctorIdList_Handler,
+		},
 		{
 			MethodName: "GetDoctorSchedule",
 			Handler:    _DoctorScheduleService_GetDoctorSchedule_Handler,
