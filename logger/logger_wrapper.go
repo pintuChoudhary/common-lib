@@ -48,3 +48,46 @@ func convertFields(items ...any) []zap.Field {
 	}
 	return fields
 }
+
+func Infof(args ...interface{}) {
+	if zapLogger == nil {
+		panic("logger not initialized")
+	}
+	zapLogger.Info(formatArgs(args...))
+}
+
+func Errorf(args ...interface{}) {
+	if zapLogger == nil {
+		panic("logger not initialized")
+	}
+	zapLogger.Error(formatArgs(args...))
+}
+
+func Debugf(args ...interface{}) {
+	if zapLogger == nil {
+		panic("logger not initialized")
+	}
+	zapLogger.Debug(formatArgs(args...))
+}
+
+func Warnf(args ...interface{}) {
+	if zapLogger == nil {
+		panic("logger not initialized")
+	}
+	zapLogger.Warn(formatArgs(args...))
+}
+
+func Fatalf(args ...interface{}) {
+	if zapLogger == nil {
+		panic("logger not initialized")
+	}
+	zapLogger.Fatal(formatArgs(args...))
+}
+
+func formatArgs(args ...interface{}) string {
+	var str string
+	for _, arg := range args {
+		str += fmt.Sprintf("%+v ", arg)
+	}
+	return str
+}

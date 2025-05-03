@@ -42,6 +42,15 @@ func Init(cfg Config) {
 			encoderCfg = zap.NewDevelopmentEncoderConfig()
 		}
 		encoderCfg.TimeKey = "timestamp"
+		encoderCfg.LevelKey = "L"
+		encoderCfg.NameKey = "logger"
+		encoderCfg.CallerKey = "C"
+		encoderCfg.MessageKey = "M"
+		encoderCfg.StacktraceKey = "S"
+		encoderCfg.LineEnding = zapcore.DefaultLineEnding
+		encoderCfg.EncodeLevel = zapcore.CapitalLevelEncoder
+		encoderCfg.EncodeDuration = zapcore.SecondsDurationEncoder
+		encoderCfg.EncodeCaller = zapcore.ShortCallerEncoder
 		encoderCfg.EncodeTime = zapcore.ISO8601TimeEncoder
 
 		jsonEncoder := zapcore.NewJSONEncoder(encoderCfg)
