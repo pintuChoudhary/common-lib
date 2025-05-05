@@ -49,8 +49,9 @@ func Init(cfg Config) {
 		encoderCfg.TimeKey = "time"
 		encoderCfg.LevelKey = "level"
 		encoderCfg.MessageKey = "msg"
-		encoderCfg.CallerKey = ""     // Disable caller field
-		encoderCfg.StacktraceKey = "" // Disable stacktrace
+		encoderCfg.StacktraceKey = ""   // Disable stacktrace
+		encoderCfg.CallerKey = "caller" // <-- Add this line
+		encoderCfg.EncodeCaller = zapcore.ShortCallerEncoder
 		encoderCfg.EncodeLevel = zapcore.CapitalLevelEncoder
 		encoderCfg.EncodeTime = zapcore.TimeEncoderOfLayout("2006-01-02 15:04:05.000")
 		encoderCfg.EncodeDuration = zapcore.StringDurationEncoder
